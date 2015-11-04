@@ -1,0 +1,5 @@
+<div class="row">
+  <div class="col-md-12">
+<h1><%= @item.name %>を購入しました。</h1>
+<h2>残りの在庫数は<%= @item.stock %>です。</h2>
+<p><%= link_to '購入履歴へ', users_history_path, class: "btn btn-warning"%> <p/>

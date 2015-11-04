@@ -1,0 +1,6 @@
+<div class='container'>
+  <h1>購入履歴</h1>
+  <% current_user.items.group_by(&:itself).each do |item, array| %>
+    <p><%= item.name %> <%= array.count %></p>
+  <% end %>
+</div>

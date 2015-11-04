@@ -1,0 +1,44 @@
+<div class= "container">
+
+<h1>商品一覧</h1>
+
+<div class='row text-right'>
+    <% if current_user %>
+    ようこそ<%= current_user.email %>さん
+    あなたのidは<%= current_user.id %>です。
+      <%= link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-danger', method: :delete %>
+    <% else %>
+      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-danger' %>
+      <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-warning' %>
+
+    <% end %>
+</div>
+
+
+    <div class='row text-center'>
+      <% @items.each do |item| %>
+            <div class='col-md-12'>
+              <%= image_tag "coffee.jpg", width: '400px' %>
+              <h1><%= item.name %></h1>
+              <p><%= item.price %>円 在庫数：<%= item.stock %> </p>
+            </div>
+            <% if current_user %>
+              <p><%= link_to '購入', purchase_item_path(item), class: "btn btn-primary", data: { confirm: '購入しますか？' } %>
+                <% end %>
+              <%= link_to '商品ページ', item, class: "btn btn-warning" %>
+              <%= link_to 'Edit', edit_item_path(item), class: "btn btn-default" %>
+              <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger"%></p>
+      <% end %>
+    </div>
+
+<br>
+
+<div class='row'>
+  <div class='col-md-12'>
+<h2>現在のユーザーの数は<%= User.count %>人です。</h2>
+<p><% User.all.each do |user| %></p>
+<p><%= user.email %></p>
+<% end %>
+</div>
+</div>
+</div>
